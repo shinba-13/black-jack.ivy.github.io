@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプルなブラックジャック</title>
+    <link rel="stylesheet" href="toranpu.css"> 
+</head>
+<body>
+
+    <h1>シンプルなブラックジャック</h1>
+
+    <div id="game-container">
+        
+        <div class="player-area">
+            <h2>ディーラーの手札: <span id="dealer-score">0</span></h2>
+            <div id="dealer-cards" class="card-display">
+                </div>
+        </div>
+
+        <hr>
+
+        <div class="player-area">
+            <h2>あなたの手札: <span id="player-score">0</span></h2>
+            <div id="player-cards" class="card-display">
+                </div>
+        </div>
+        
+        <div id="controls">
+            <p id="message">Dealを押して開始してください。</p>
+            <button id="deal-btn">Deal (取引開始)</button>
+            <button id="hit-btn" disabled>Hit (カード追加)</button>
+            <button id="stand-btn" disabled>Stand (勝負)</button>
+        </div>
+
+    </div>
+    <div id="betting-area">
+    <hr>
+    <h3>
+        残高: $<span id="balance">1000</span>
+        (現在の賭け金: $<span id="current-bet">0</span>)
+    </h3>
+    <label for="bet-amount">賭ける額:</label>
+    <input type="number" id="bet-amount" value="50" min="10" step="10">
+    <button id="place-bet-btn">Bet (賭ける)</button>
+</div>
+<table class="tech-table">
+    <thead>
+        <tr>
+            <th>技術</th>
+            <th>役割</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-label="技術">**HTML**</td>
+            <td data-label="役割">ゲーム画面の構造、ボタン、スコア表示エリアの定義。</td>
+        </tr>
+        <tr>
+            <td data-label="技術">**CSS**</td>
+            <td data-label="役割">カジノゲームらしいデザイン、ボタンやカードの視覚的な装飾、レイアウトの調整。</td>
+        </tr>
+        <tr>
+            <td data-label="技術">**JavaScript**</td>
+            <td data-label="役割">ゲームの中核となるロジックを実装。デッキの作成・シャッフル、点数計算、賭け金管理、ボタン操作に応じたカードのドロー、勝敗判定などを担当。</td>
+        </tr>
+    </tbody>
+</table>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
