@@ -1,0 +1,213 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header {
+    background-color: #006400; /* カジノテーブルのような深緑 */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #ffc107; /* 警告色（目立つ黄色） */
+    color: #333;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e0a800;
+}
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #006400;
+    border-bottom: 3px solid #ffc107;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* 特徴リスト */
+.feature-list h3 {
+    color: #555;
+    margin-top: 20px;
+}
+
+.feature-list ul {
+    list-style-type: '👉 '; /* 絵文字のリストマーカー */
+    padding-left: 20px;
+}
+
+.feature-list li {
+    margin-bottom: 10px;
+}
+
+/* 遊び方ステップ */
+#how-to-play ol {
+    counter-reset: step-counter;
+    list-style: none;
+    padding: 0;
+}
+
+#how-to-play li {
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 50px;
+}
+
+#how-to-play li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #ffc107;
+    color: #333;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#how-to-play h3 {
+    margin: 0 0 5px 0;
+    color: #006400;
+}
+
+/* 技術スタックテーブル */
+.tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tech-table th, .tech-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tech-table th {
+    background-color: #006400;
+    color: white;
+}
+
+.tech-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: white;
+    font-size: 0.9em;
+}
+/* --- スマホ対応 (最大画面幅 600px 以下のデバイス向け) --- */
+@media (max-width: 600px) {
+    
+    header {
+        padding: 30px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    main {
+        padding: 0 10px;
+    }
+
+    /* 遊び方セクションの調整 */
+    #how-to-play li {
+        padding-left: 40px; /* スペースを少し狭く */
+    }
+    
+    #how-to-play li::before {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 1em;
+    }
+    
+    /* 技術スタックテーブルの調整 */
+    .tech-table {
+        /* テーブルのセルが横に並びきらない場合、
+           スマートフォンではスタック表示（縦並び）に切り替えるテクニック */
+        display: block;
+        width: 100%;
+        border: none;
+    }
+    
+    .tech-table thead {
+        display: none; /* ヘッダー（技術、役割）は非表示にする */
+    }
+    
+    .tech-table tbody, .tech-table tr {
+        display: block;
+    }
+    
+    .tech-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    
+    .tech-table td {
+        display: block; /* セルを縦に並べる */
+        text-align: right;
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* 左側にスペースを空ける */
+    }
+    
+    .tech-table td::before {
+        /* 隠したヘッダー（th）の内容を、tdの前に擬似要素で表示 */
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+    
+    /* HTML修正: 擬似要素を表示するために、guide.htmlのtdに data-label 属性を追加する必要があります */
+}

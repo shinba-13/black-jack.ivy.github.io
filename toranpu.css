@@ -1,0 +1,277 @@
+/* カジノ風背景の指定 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 垂直方向の中央揃えも追加 */
+    min-height: 100vh; /* 画面全体を使う */
+    margin: 0;
+    padding: 20px;
+    
+    /* 背景画像の設定 */
+    background-image: url('https://images.unsplash.com/photo-1594247573033-b4e8b3e8c8a1?crop=entropy&cs=tinysrgb&fit=max&fm=jp%7Cjpeg&ixid=M3w0NTgzNTF8MHwxfHNlYXJjaHwxfHxjYXNpbm8lMjB0YWJsZXxlbnwxfHx8fHwxNzEyNzg3MDU2fDA&ixlib=rb-4.0.3&q=80&w=1080');
+    background-size: cover; /* 画面いっぱいに広げる */
+    background-position: center; /* 中央に配置 */
+    background-attachment: fixed; /* スクロールしても背景を固定 */
+    position: relative; /* オーバーレイのために必要 */
+    color: #eee; /* 文字色を明るくする */
+}
+
+/* 背景に半透明のオーバーレイを重ねて、文字を読みやすくする */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 黒の半透明 */
+    z-index: -1; /* 背景画像のさらに奥に配置 */
+}
+
+h1 {
+    color: #ffc107; /* 目立つ金色 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 25px;
+}
+
+/* ゲームコンテナのスタイル */
+#game-container {
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒背景 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 明るいシャドウ */
+    border: 1px solid #ffc107; /* 金色のボーダー */
+    width: 90%;
+    max-width: 650px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.3em;
+    color: #ffc107; /* ディーラーとプレイヤーのヘッダーも金色に */
+}
+
+/* カードの表示エリア */
+.card-display {
+    min-height: 100px; /* 高さを確保 */
+    display: flex;
+    flex-wrap: wrap; /* カードが増えたら折り返す */
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center; /* 中央寄せ */
+}
+
+/* 個々のカードのデザイン (既存のものを維持しつつ、背景に合わせる) */
+.card {
+    position: relative;
+    width: 70px; /* 少し大きくする */
+    height: 100px; /* 少し大きくする */
+    padding: 5px;
+    border: 1px solid #aaa;
+    border-radius: 8px; /* 角を少し丸く */
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: #333; /* デフォルトのカードの文字色は黒 */
+}
+
+.card .rank {
+    position: absolute;
+    font-size: 1em; /* ランクのフォントサイズを調整 */
+}
+
+.card .top {
+    top: 5px;
+    left: 5px;
+}
+
+.card .bottom {
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}
+
+.card .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em; /* 中央のスートを大きく表示 */
+}
+
+.card.hidden {
+    background-color: #006400; /* 裏面を濃い緑に */
+    border: 3px solid gold;
+    color: white; /* 裏面の文字色を白に */
+    font-size: 1em;
+}
+
+.red {
+    color: red; /* ハートとダイヤの色 */
+}
+
+#controls {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* 区切り線 */
+}
+
+button {
+    padding: 12px 20px; /* ボタンを少し大きく */
+    margin: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #008000; /* グリーン */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover:not(:disabled) {
+    background-color: #005000;
+    transform: translateY(-2px); /* 少し浮き上がるエフェクト */
+}
+
+button:disabled {
+    background-color: #555; /* 無効なボタンは暗く */
+    cursor: not-allowed;
+}
+
+#message {
+    font-weight: bold;
+    margin-bottom: 20px;
+    min-height: 25px; /* メッセージエリアの高さ確保 */
+    color: #ffc107; /* 結果メッセージも金色に */
+    font-size: 1.1em;
+}
+
+/* 賭け金エリア */
+#betting-area {
+    margin-top: 25px;
+    text-align: center;
+    color: #eee; /* 文字色を明るく */
+}
+
+#betting-area h3 {
+    font-size: 1.2em;
+    color: #ffc107;
+    margin-bottom: 15px;
+}
+
+#betting-area label {
+    margin-right: 10px;
+}
+
+#bet-amount {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80px;
+    text-align: right;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+/* 区切り線 */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    margin: 25px 0;
+}
+
+/* 遊び方ガイドへのリンク */
+.guide-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.guide-link a {
+    color: #90ee90; /* 明るい緑 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.guide-link a:hover {
+    color: #ffc107; /* ホバーで金色 */
+}
+/* --- スマホ対応 (最大画面幅 600px 以下のデバイス向け) --- */
+@media (max-width: 600px) {
+    
+    body {
+        /* スマートフォンでは上下のパディングを増やしすぎない */
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #game-container {
+        padding: 20px 15px; /* 左右のパディングを少し減らす */
+        max-width: 100%; /* 最大幅を100%にする */
+    }
+
+    /* プレイヤーとディーラーのスコアを小さくする */
+    h2 {
+        font-size: 1.1em;
+    }
+
+    /* カードのサイズ調整 */
+    .card {
+        width: 50px; /* カードの横幅を縮小 */
+        height: 80px; /* カードの高さを縮小 */
+        font-size: 0.9em;
+        /* スートやランクの表示サイズ調整 */
+    }
+    
+    .card .center {
+        font-size: 1.5em; /* 中央のスートを小さく */
+    }
+    
+    .card-display {
+        gap: 5px; /* カード間のスペースを詰める */
+        justify-content: center;
+    }
+
+    /* 賭け金エリアの調整 */
+    #betting-area h3 {
+        font-size: 1em;
+    }
+
+    #bet-amount {
+        width: 60px; /* 賭け金入力欄を小さく */
+        margin-right: 5px;
+    }
+    
+    #place-bet-btn {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    /* 操作ボタンの調整 */
+    #controls {
+        display: flex; /* ボタンを横並びにする */
+        justify-content: space-around; /* 均等に配置 */
+        flex-wrap: wrap; /* 画面が狭ければ折り返す */
+    }
+
+    button {
+        flex-grow: 1; /* ボタンが伸びて均等幅になりやすくする */
+        margin: 5px;
+        padding: 10px 5px;
+        font-size: 0.9em;
+        min-width: 80px;
+    }
+}
